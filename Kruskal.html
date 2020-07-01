@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/sigma.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var a = 0;
+        var b = 0;
+     
+        function wheel(d, c)
+        {
+            var e = $('ul.xxx').children().length;
+            var f = 4*5 + c;
+            setTimeout(function() {
+                $('ul.xxx li:eq(' + a + ')').addClass('active').siblings().removeClass('active');
+                a++;
+                b++;
+                if (a == e)
+                    a = 0;
+                if (b < f)
+                    wheel(d, c);             
+            }, d);
+        }
+     
+        wheel(450, 15); 
+      });
+    $(document).ready(function(){
+    	$("#div1").delay(1000).fadeIn();
+    	$("#div2").delay(1000).fadeIn();
+    	$("#div3").delay(5000).fadeIn();
+    	$("#div4").delay(7500).fadeIn();
+    	$("#div5").delay(11000).fadeIn();
+    	$("#div6").delay(14000).fadeIn();
+
+    });	
+    </script>
+  <style>
+        #sigma-container { 
+       width: 550px;
+       height: 450px;
+       outline-color: #a7aba8;
+       outline-style: solid;
+        background-color:#E1E1E1
+        }   
+   	li.active {
+    background-color: yellow;
+}
+.step{
+	width:300px;
+	font-family: sans-serif;
+	font-size:16px;
+	text-align: left;
+}
+.xxx{
+  background-color: white;
+  width: 500px;
+  padding: 0px;
+  outline-color: #a7aba8;
+  outline-style: solid;
+  font-family: sans-serif;
+  margin: 0px;
+}
+.yyy{
+  background-color: white;
+  width: 500px;
+  height: 500px;
+  outline-color: #a7aba8;
+  outline-style: solid;
+  padding: 0px;
+ }
+.flex{
+ 	display: flex;
+ }
+}
+</style>
+	<meta charset="UTF-8">
+	<title>Thuật toán Kruskal</title>
+</head>
+<body>
+	
+
+	<h1 style="font-family: sans-serif;">
+					Thuật toán Kruskal
+		</h1>
+	<div class="flex">
+	<ul class="xxx">
+		<div class="step">
+			<b> Bước 1: </b>
+			<br>ET = {}; // là tập cạnh của cây khung tối tiểu;
+			<br>VT = {}; // là tập đỉnh cây khung tối tiểu;
+			<br>weight(T) = 0;
+		</div>
+		<br>
+		<li class="step">
+			<br> <b> Bước 2:</b> <br> While(VT != V)
+		</li>
+		<br>
+
+
+		<li class="step">
+			<br> &emsp; 2.1: chọn e trong tập cạnh của đồ thị G (e không thuộc ET), sao cho: khi thêm e vào cây T thì T không tạo ra chu trình và e có trọng số nhỏ nhất;
+		</li>
+		<br>	
+
+
+		<li class ="step" >
+			<br> &emsp; 2.2: Thêm e vào ET; weight(T) = weight(T) + w(e);
+		</li>
+		<br>	
+
+
+		<li class="step" >
+			<br> &emsp; 2.3: Thêm đỉnh u, w (u, w thuộc cạnh e) vào tập VT;	
+		</li>
+		<br>	
+    </ul>
+         <div id='sigma-container'>
+        <script>
+          var s = new sigma(
+          {
+            graph: g,
+            renderer: {
+              container: document.getElementById('sigma-container'),
+              type: 'canvas'
+            },
+            settings: {
+              minNodeSize: 0,
+              maxNodeSize: 10,
+              minEdgeSize: 0,
+              maxEdgeSize: 2,
+              enableEdgeHovering: true,
+              edgeHoverSizeRatio: 4
+            }
+          }
+          );
+          var g = {
+            nodes: [
+              { id: "n0", label: "A", x: 2, y: 0, size: 1, color: "#000000"},
+              { id: "n1", label: "B", x: 0, y: 4, size: 1,color: "#000000" },
+              { id: "n2", label: "C", x: 5, y: 1.5, size: 1,color: "#000000" },
+              { id: "n3", label: "D", x: 6, y: 3.5, size: 1,color: "#000000" },
+              { id: "n4", label: "E", x: 4, y: 6, size: 1,color: "#000000"},
+              { id: "n5", label: "F", x: 9, y: 8, size: 1,color: "#000000"},
+              //them do dai canh
+              { id: "n6", label: "5", x: 3.7, y: 0.18, size: 1,color: "#E1E1E1"},
+              { id: "n7", label: "3", x: 0.2, y: 1.3, size: 1,color: "#E1E1E1"},
+              { id: "n8", label: "3", x: 2.4, y: 2.4, size: 1,color: "#E1E1E1"},
+              { id: "n9", label: "9", x: 2.8, y: 1.2, size: 1,color: "#E1E1E1"},
+              { id: "n10", label: "6", x: 5.8, y: 2, size: 1,color: "#E1E1E1"},
+              { id: "n11", label: "4", x: 3, y: 3.4, size: 1,color: "#E1E1E1"},
+              { id: "n12", label: "6", x: 3.8, y: 4.4, size: 1,color: "#E1E1E1"},
+              { id: "n13", label: "7", x: 1.2, y: 5.7, size: 1,color: "#E1E1E1"},
+              { id: "n14", label: "2", x: 4.8, y: 4.3, size: 1,color: "#E1E1E1"},
+              { id: "n15", label: "2", x: 7.8, y: 4.6, size: 1,color: "#E1E1E1"},
+              { id: "n16", label: "10", x: 5, y: 7.5, size: 1,color: "#E1E1E1"},
+              
+              
+          ],
+            edges: [
+              { id: "e0", source: "n0", target: "n2", type:'curve', size:1, color : '#000'},//ACABADBCBEBDCDCEDEDFEF
+              { id: "e1", source: "n1", target: "n0", type:'curve', size:1, color : '#000'},//AB-1
+              { id: "e2", source: "n0", target: "n3", type:'line', size:1, color : '#000'},//AD-2
+              { id: "e3", source: "n1", target: "n2", type:'line', size:1, color : '#000'},//BC-3
+              { id: "e4", source: "n4", target: "n1", type:'curve', size:1, color : '#000'},//BE-4
+              { id: "e5", source: "n1", target: "n3",  type:'line', size:1, color : '#000'},//BD-5
+              { id: "e6", source: "n2", target: "n3", type:'curve', size:1, color : '#000'},//CD-6
+              { id: "e7", source: "n2", target: "n4",  type:'line', size:1, color : '#000'},//CE-7
+              { id: "e8", source: "n3", target: "n4",  type:'line', size:1, color : '#000'},//DE-8
+              { id: "e9", source: "n3", target: "n5",  type:'curve', size:1, color : '#000'},//DF-9
+              { id: "e10", source: "n5", target: "n4",  type:'curve', size:1, color : '#000'}//EF-10
+            ]
+          }
+            function drawnode(key)
+          {
+            switch(key)
+            {
+              case "A":
+                s.graph.nodes()[0].color =  "#ff0000";
+                s.refresh();
+                break;
+              case "B":
+                s.graph.nodes()[1].color =  "#ff0000";
+                s.refresh();
+                break;  
+              case "C":
+                s.graph.nodes()[2].color =  "#ff0000";
+                s.refresh();
+                break;
+              case "D":
+                s.graph.nodes()[3].color =  "#ff0000";
+                s.refresh();
+                break;
+              case "E":
+                s.graph.nodes()[4].color =  "#ff0000";
+                s.refresh();
+                break;
+              case "F":
+                s.graph.nodes()[5].color =  "#ff0000";
+                s.refresh();
+                break;
+            }
+          }
+          function drawgraph(key)
+          {
+            switch(key)
+            {
+              case "AC":
+                s.graph.edges()[0].color =  "#ff0000";
+                break;
+              case "AB":
+                s.graph.edges()[1].color =  "#ff0000";
+                break;  
+              case "AD":
+                s.graph.edges()[2].color =  "#ff0000";
+                break;
+              case "BC":
+                s.graph.edges()[3].color =  "#ff0000";
+                break;
+              case "BE":
+                s.graph.edges()[4].color =  "#ff0000";
+                break;
+              case "BD":
+                s.graph.edges()[5].color =  "#ff0000";
+                break;
+              case "CD":
+                s.graph.edges()[6].color =  "#ff0000";
+                break;
+              case "CE":
+                s.graph.edges()[7].color =  "#ff0000";
+                break;
+              case "DE":
+                s.graph.edges()[8].color =  "#ff0000";
+                break;
+              case "DF":
+                s.graph.edges()[9].color =  "#ff0000";
+                break;
+              case "EF":
+                s.graph.edges()[10].color =  "#ff0000";
+                break;
+            }
+    
+          }
+          function drawgraphyellow(key)
+          {
+            switch(key)
+            {
+                case "AC":
+                    s.graph.edges()[0].color =  "#ff9000";
+                    break;
+    
+                case "AB":
+                    s.graph.edges()[1].color =  "#ff9000";
+                    break;  
+    
+                case "AD":
+                    s.graph.edges()[2].color =  "#ff9000";
+                    break;
+    
+                case "BC":
+                    s.graph.edges()[3].color =  "#ff9000";
+                    break;
+    
+                case "BE":
+                    s.graph.edges()[4].color =  "#ff9000";
+                    break;
+    
+                case "BD":
+                    s.graph.edges()[5].color =  "#ff9000";
+                    break;
+    
+                case "CD":
+                    s.graph.edges()[6].color =  "#ff9000";
+                    break;
+    
+                case "CE":
+                    s.graph.edges()[7].color =  "#ff9000";
+                    break;
+    
+                case "DE":
+                    s.graph.edges()[8].color =  "#ff9000";
+                    break;
+    
+                case "DF":
+                    s.graph.edges()[9].color =  "#ff9000";
+                    break;
+    
+                case "EF":
+                    s.graph.edges()[10].color =  "#ff9000";
+                    break;
+            }
+          }
+          function drawnode(key)
+          {
+            switch(key)
+            {
+                case "A":
+                    s.graph.nodes()[0].color =  "#ff99cc";
+                    s.refresh();
+                    break;
+    
+                case "B":
+                    s.graph.nodes()[1].color =  "#00ff00";
+                    s.refresh();
+                    break;  
+    
+                case "C":
+                    s.graph.nodes()[2].color =  "#000066";
+                    s.refresh();
+                    break;
+    
+                case "D":
+                    s.graph.nodes()[3].color =  "#00ffcc";
+                    s.refresh();
+                    break;
+                
+                case "E":
+                    s.graph.nodes()[4].color =  "#ff9933";
+                    s.refresh();
+                    break;
+    
+                case "F":
+                    s.graph.nodes()[5].color =  "#333300";
+                    s.refresh();
+                    break;
+            }
+    
+          }
+          function cleargraph()
+          {
+            s.graph.edges()[0].color =  "#000000";
+            s.graph.edges()[1].color =  "#000000";
+            s.graph.edges()[2].color =  "#000000";
+            s.graph.edges()[3].color =  "#000000";
+            s.graph.edges()[4].color =  "#000000";
+            s.graph.edges()[5].color =  "#000000";
+            s.graph.edges()[6].color =  "#000000";
+            s.graph.edges()[7].color =  "#000000";
+            s.graph.edges()[8].color =  "#000000";
+            s.graph.edges()[9].color =  "#000000";
+            s.graph.edges()[10].color =  "#000000";
+          }
+        s.graph.read(g);
+        s.refresh(); 
+    
+      var mangDo = [];
+      var mangVang = [];
+    
+           var graph = [
+      'AC5',
+      'AB3',
+      'AD9',
+      'BC3',
+      'BE7',
+      'BD4',
+      'CD6',
+      'CE6',
+      'DE2',
+      'DF2',
+      'EF10'
+    ];
+    
+    function biendoi(edge)
+    {
+      var [left, right, ...cost] = edge;
+      cost = parseInt(cost.join(''), 10);
+      return { left, right, cost };
+    }
+    function addToMap(map, node1, node2, cost)
+    {
+      var tam={node1,node2,cost};
+      map.push(tam);
+    }
+    var graphToMap = (graph) => {
+      var map = [];
+    
+      for (var edge of graph) {
+        var { left, right, cost } = biendoi(edge);
+    
+        addToMap(map, left, right, cost);
+      }
+      return map;
+    };
+    
+    function run(graph)
+    {
+      var map = graphToMap(graph);
+      map.sort(function(a, b){return a.cost - b.cost});
+      var mangChiSo = [];
+      var mangTrongSo = [];
+      var mangChuaDuongDi = [];
+      var tongCayKhung=map[0].cost;
+      mangChuaDuongDi.push(map[0].node1+map[0].node2);
+      mangVang.push(map[0].node1+map[0].node2);
+      mangDo.push(map[0].node1+map[0].node2);
+      mangChiSo.push(map[0].node1);
+      mangChiSo.push(map[0].node2);
+      mangTrongSo.push(map[0].node1);
+      mangTrongSo.push(map[0].node1);
+      for(var i=1;i<map.length;i++)
+      {
+          if(mangChiSo.indexOf(map[i].node1)==-1)
+          {
+            mangChiSo.push(map[i].node1);
+            tongCayKhung+=map[i].cost;
+            mangChuaDuongDi.push(map[i].node1+map[i].node2);
+            mangVang.push(map[i].node1+map[i].node2);
+            mangDo.push(map[i].node1+map[i].node2);
+            if(mangChiSo.indexOf(map[i].node2)==-1)
+            {
+              mangChiSo.push(map[i].node2);
+              mangTrongSo.push(map[i].node1);
+              mangTrongSo.push(map[i].node1);
+            }
+            else
+            {
+              mangTrongSo.push(mangTrongSo[mangChiSo.indexOf(map[i].node2)]);
+            }
+          }
+          else
+          {
+            if(mangChiSo.indexOf(map[i].node2)==-1)
+            {
+              mangChiSo.push(map[i].node2);
+              mangTrongSo.push(mangTrongSo[mangChiSo.indexOf(map[i].node1)]);
+              tongCayKhung+=map[i].cost;
+              mangChuaDuongDi.push(map[i].node1+map[i].node2);
+              mangVang.push(map[i].node1+map[i].node2);
+              mangDo.push(map[i].node1+map[i].node2);
+            }
+            else
+            {
+              if(mangTrongSo[mangChiSo.indexOf(map[i].node1)]==mangTrongSo[mangChiSo.indexOf(map[i].node2)])
+              {
+                mangDo.push(map[i].node1+map[i].node2);
+                continue;
+    
+              } 
+              else
+              {
+                mangChuaDuongDi.push(map[i].node1+map[i].node2);
+                mangVang.push(map[i].node1+map[i].node2);
+                mangDo.push(map[i].node1+map[i].node2);
+                tongCayKhung+=map[i].cost;
+                var bien = mangTrongSo[mangChiSo.indexOf(map[i].node2)];
+                for(var j=0;j<mangChiSo.length;j++)
+                {
+                  if(mangTrongSo[j]==bien)
+                    mangTrongSo[j]=mangTrongSo[mangChiSo.indexOf(map[i].node1)];
+                }
+              }
+            }
+          }
+      }
+      return mangVang;
+    
+    }
+    
+    var a = run(graph);
+    
+    function start(counter){
+      if(counter < a.length){
+        setTimeout(function(){
+          var key = a[counter];
+          drawgraph(key);
+          s.refresh();
+          counter++;
+          var key2 = mangVang[counter-1];
+          drawgraphyellow(key2);
+          if (counter == a.length)
+          {
+            var key3 = mangVang[counter];
+            drawgraphyellow(key3);
+            s.refresh();
+          }
+          start(counter);
+        }, 1000);
+      }
+    }
+    start(0);
+       </script></div>
+	<div class="xxx">
+    <div id="div1" style="display: none"> <b>ET ={}, VT={}</b></div>
+    <div id="div2" style="display: none">
+    <br>2.1 Chọn ED
+    <br>2.2 <b>ET={ED}</b>
+    <br>2.3 <b>VT={E,D}</b>
+</div>
+    <div id="div3" style="display: none"><br>2.1 Chọn DF 
+    <br>2.2 <b>ET={ED,DF}</b>
+    <br>2.3 <b>VT={E,D,F}</b>
+</div>
+<div id ="div4" style="display: none">
+    <br>2.1 Chọn AB
+    <br>2.2 <b>ET={ED,DF,AB}</b>
+    <br>2.3 <b>VT={E,D,F,A,B}</b>
+</div>
+<div id="div5" style="display: none">
+    <br>2.1 Chọn BC
+    <br>2.2 <b>ET={ED,DF,AB,BC}</b>
+    <br>2.3 <b>VT={E,D,F,A,B,C}</b>
+</div>
+    <div id="div6" style="display: none">VT=V => Dừng. Vậy cây khung nhỏ nhất gồm các cạnh là: AB, BC,ED,EF,BD</div>
+	</div>
+</div> 
+	
+</body>
+</html>

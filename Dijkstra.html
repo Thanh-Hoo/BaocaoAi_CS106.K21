@@ -1,0 +1,590 @@
+
+<html>
+<head>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/sigma.min.js
+"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sigma@1.2.1/src/renderers/canvas/sigma.canvas.edges.curve.js
+"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var a = 0;
+        var b = 0;
+     
+        function wheel(d, c)
+        {$(document).ready(function(){
+    	$("#div1").delay("fast").fadeIn();
+    });
+            var e = $('ul.xxx').children().length;
+            var f = 5*4 + c;
+            setTimeout(function() {
+                $('ul.xxx li:eq(' + a + ')').addClass('active').siblings().removeClass('active');
+                a++;
+                b++;
+                if (a == e)
+                    a = 0;
+                if (b < f)
+                    wheel(d, c);             
+            }, d);
+        }
+     
+        wheel(900, 6); 
+      });
+
+     $(document).ready(function(){
+    	$("#div1").delay(4000).fadeIn();
+    	$("#div2").delay(8500).fadeIn();
+    	$("#div3").delay(12000).fadeIn();
+    	$("#div4").delay(16000).fadeIn();
+    	$("#div5").delay(20000).fadeIn();//timedelay o day ne
+        $("#div6").delay(24000).fadeIn();
+    });	 
+</script>
+<style>
+li.active {
+    background-color: yellow;
+}
+      #sigma-container {
+        width: 500px;
+        height: 500px;
+         outline-color: #a7aba8;
+       outline-style: solid;
+        font-family: sans-serif;
+        background-color:#E1E1E1
+    }
+.step{
+	width:300px;
+	font-family: sans-serif;
+	font-size:15px;
+	text-align: left;
+}
+.xxx{
+  background-color: white;
+  width: 400px;
+  padding: 0px;
+  margin: 0px;
+}
+.yyy{
+  background-color: white;
+  width: 500px;
+  height: 500px;
+  outline-color: #a7aba8;
+  outline-style: solid;
+  padding: 0px;
+ }
+ .flex{
+ 	display: flex;
+ }
+</style>
+</script>
+	<title> Thuật toán Dijkstra</title>
+</head>
+<body>
+		<h1>
+					Thuật toán dijkstra (A -> F)
+		</h1>
+		<p style="font-family: sans-serif;">
+		Mỗi đỉnh tương ứng với một số g(n): Giá thành đi từ đỉnh ban đầu tới n
+		<br> C là đỉnh đóng	
+		<br> O là đỉnh mở <br>
+		<div class="flex">
+			<div  id="div1"class="step" style="background-color: white">
+			<b> Bước 1: </b>
+			<br>&emsp;g(a) = 0;
+			<br>&emsp;pre(a) = -1;
+			<br>&emsp;Open = {a};
+			<br>&emsp;Close = {};
+		<ul class="xxx">
+		<li class="step" >
+			<br> <b> Bước 2:</b> <br>&emsp; While(O != {})
+		</li>
+		<li class="step" >
+			<br> &emsp; 2.1: Chọn x thuộc O có g(x) nhỏ nhất 
+		</li>
+		<li class="step" >
+			<br> &emsp; 2.2: Chuyển x từ Open sang Close(lấy x từ O cho vào C)
+		</li>
+		<li class="step" >
+			<br> &emsp; 2.3: Nếu x là mục tiêu thì: 
+			<br> &emsp;&emsp; Dừng và kết luận: tìm được lời giải	
+		</li>	
+		<li class="step" >
+			<br> &emsp; 2.4: Xét các đỉnh y nằm kề x: 
+			<br> &emsp; TH1: Nếu Y là đỉnh mới(Ko thuộc O và ko thuộc C): 
+			<br> &emsp;&emsp;	g(y) = g(x) + w(x,y);
+			<br> &emsp;&emsp;	pre(y) = x;
+			<br> &emsp;&emsp;	Lưu lại y trong Open;
+			<br> &emsp;	TH2: Y thuộc O: 
+			<br> &emsp;&emsp;	Nếu g(x) + cost(x,y) < g(y):
+			<br> &emsp;&emsp;&emsp; g(y) = g(x) + cost(x,y)	và pre(y) = x
+		</li>
+        </ul>
+       </div>
+  <div id='sigma-container'></div>
+    <script>
+      var s = new sigma(
+      {
+        graph: g,
+        renderer: {
+          container: document.getElementById('sigma-container'),
+          type: 'canvas'
+        },
+        settings: {
+          minNodeSize: 0,
+          maxNodeSize: 10,
+          minEdgeSize: 0,
+          maxEdgeSize: 2,
+          enableEdgeHovering: true,
+          edgeHoverSizeRatio: 4
+        }
+      }
+      );
+      var g = {
+        nodes: [
+          { id: "n0", label: "A", x: 2, y: 0, size: 1, color: "#000000"},
+          { id: "n1", label: "B", x: 0, y: 4, size: 1,color: "#000000" },
+          { id: "n2", label: "C", x: 5, y: 1.5, size: 1,color: "#000000" },
+          { id: "n3", label: "D", x: 6, y: 3.5, size: 1,color: "#000000" },
+          { id: "n4", label: "E", x: 4, y: 6, size: 1,color: "#000000"},
+          { id: "n5", label: "F", x: 9, y: 8, size: 1,color: "#000000"},
+          //them do dai canh
+          { id: "n6", label: "5", x: 3.7, y: 0.18, size: 1,color: "#E1E1E1"},
+          { id: "n7", label: "3", x: 0.2, y: 1.3, size: 1,color: "#E1E1E1"},
+          { id: "n8", label: "3", x: 2.4, y: 2.4, size: 1,color: "#E1E1E1"},
+          { id: "n9", label: "9", x: 2.8, y: 1.2, size: 1,color: "#E1E1E1"},
+          { id: "n10", label: "6", x: 5.8, y: 2, size: 1,color: "#E1E1E1"},
+          { id: "n11", label: "4", x: 3, y: 3.4, size: 1,color: "#E1E1E1"},
+          { id: "n12", label: "6", x: 3.8, y: 4.4, size: 1,color: "#E1E1E1"},
+          { id: "n13", label: "7", x: 1.2, y: 5.7, size: 1,color: "#E1E1E1"},
+          { id: "n14", label: "2", x: 4.8, y: 4.3, size: 1,color: "#E1E1E1"},
+          { id: "n15", label: "2", x: 7.8, y: 4.6, size: 1,color: "#E1E1E1"},
+          { id: "n16", label: "10", x: 5, y: 7.5, size: 1,color: "#E1E1E1"},
+          
+          
+      ],
+        edges: [
+          { id: "e0", source: "n0", target: "n2", type:'curve', size:1, color : '#000'},//AC-0
+          { id: "e1", source: "n1", target: "n0", type:'curve', size:1, color : '#000'},//AB-1
+          { id: "e2", source: "n0", target: "n3", type:'line', size:1, color : '#000'},//AD-2
+          { id: "e3", source: "n1", target: "n2", type:'line', size:1, color : '#000'},//BC-3
+          { id: "e4", source: "n4", target: "n1", type:'curve', size:1, color : '#000'},//BE-4
+          { id: "e5", source: "n1", target: "n3",  type:'line', size:1, color : '#000'},//BD-5
+          { id: "e6", source: "n2", target: "n3", type:'curve', size:1, color : '#000'},//CD-6
+          { id: "e7", source: "n2", target: "n4",  type:'line', size:1, color : '#000'},//CE-7
+          { id: "e8", source: "n3", target: "n4",  type:'line', size:1, color : '#000'},//DE-8
+          { id: "e9", source: "n3", target: "n5",  type:'curve', size:1, color : '#000'},//DF-9
+          { id: "e10", source: "n5", target: "n4",  type:'curve', size:1, color : '#000'}//EF-10
+        ]
+      }
+
+      function drawgraph(key)
+      {
+        switch(key)
+        {
+          case "AC":
+            s.graph.edges()[0].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "AB":
+            s.graph.edges()[1].color =  "#ff0000";
+            s.refresh();
+            break;  
+          case "AD":
+            s.graph.edges()[2].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "BC":
+            s.graph.edges()[3].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "BE":
+            s.graph.edges()[4].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "BD":
+            s.graph.edges()[5].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "CD":
+            s.graph.edges()[6].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "CE":
+            s.graph.edges()[7].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "DE":
+            s.graph.edges()[8].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "DF":
+            s.graph.edges()[9].color =  "#ff0000";
+            s.refresh();
+            break;
+          case "EF":
+            s.graph.edges()[10].color =  "#ff0000";
+            s.refresh();
+            break;
+        }
+      }
+
+      function drawnode(key)
+      {
+        switch(key)
+        {
+          case "A":
+            s.graph.nodes()[0].color =  "#19b6ff";
+            s.refresh();
+            break;
+          case "B":
+            s.graph.nodes()[1].color =  "#19b6ff";
+            s.refresh();
+            break;  
+          case "C":
+            s.graph.nodes()[2].color =  "#19b6ff";
+            s.refresh();
+            break;
+          case "D":
+            s.graph.nodes()[3].color =  "#19b6ff";
+            s.refresh();
+            break;
+          case "E":
+            s.graph.nodes()[4].color =  "#19b6ff";
+            s.refresh();
+            break;
+          case "F":
+            s.graph.nodes()[5].color =  "#19b6ff";
+            s.refresh();
+            break;
+        }
+      }
+      function drawgraphyellow(key)
+      {
+        switch(key)
+        {
+            case "AC":
+                s.graph.edges()[0].color =  "#19b6ff";
+                break;
+
+            case "AB":
+                s.graph.edges()[1].color =  "#19b6ff";
+                break;  
+
+            case "AD":
+                s.graph.edges()[2].color =  "#19b6ff";
+                break;
+
+            case "BC":
+                s.graph.edges()[3].color =  "#19b6ff";
+                break;
+
+            case "BE":
+                s.graph.edges()[4].color =  "#19b6ff";
+                break;
+
+            case "BD":
+                s.graph.edges()[5].color =  "#19b6ff";
+                break;
+
+            case "CD":
+                s.graph.edges()[6].color =  "#19b6ff";
+                break;
+
+            case "CE":
+                s.graph.edges()[7].color =  "#19b6ff";
+                break;
+
+            case "DE":
+                s.graph.edges()[8].color =  "#19b6ff";
+                break;
+
+            case "DF":
+                s.graph.edges()[9].color =  "#19b6ff";
+                break;
+
+            case "EF":
+                s.graph.edges()[10].color =  "#19b6ff";
+                break;
+        }
+      }
+      function cleargraph()
+      {
+        s.graph.edges()[0].color =  "#000000";
+        s.graph.edges()[1].color =  "#000000";
+        s.graph.edges()[2].color =  "#000000";
+        s.graph.edges()[3].color =  "#000000";
+        s.graph.edges()[4].color =  "#000000";
+        s.graph.edges()[5].color =  "#000000";
+        s.graph.edges()[6].color =  "#000000";
+        s.graph.edges()[7].color =  "#000000";
+        s.graph.edges()[8].color =  "#000000";
+        s.graph.edges()[9].color =  "#000000";
+        s.graph.edges()[10].color =  "#000000"
+      }
+      s.graph.read(g);
+    s.refresh(); 
+    //s.graph.nodes()[0].color =  "#ff0000";  
+    var result=[];
+    var mangDo = [];
+  var mangVang = [];
+  var mangDi = [];
+  var mangDinh = [];
+       var graph = [
+       'AC5',
+        'AB3',
+        'AD9',
+        'BC3',
+        'BE7',
+        'BD4',
+        'CD6',
+        'CE6',
+        'DE2',
+        'DF2',
+        'EF10'
+];
+
+function biendoi(edge)
+{
+  var [left, right, ...cost] = edge;
+  cost = parseInt(cost.join(''), 10);
+  return { left, right, cost };
+}
+function addToMap(map, node1, node2, cost)
+{
+  var tam={node1,node2,cost};
+  map.push(tam);
+}
+var graphToMap = (graph) => {
+  var map = [];
+
+  for (var edge of graph) {
+    var { left, right, cost } = biendoi(edge);
+
+    addToMap(map, left, right, cost);
+  }
+  return map;
+};
+
+var them = (mangTrongSo,a,b)=>
+{
+  mangTrongSo.push({a,b});
+}
+
+function run(graph, start, end)
+{ 
+  var map = graphToMap(graph);
+  var mangChiSo = [];
+  var mangTrongSo = [];
+  var mangChuaDinhDaDi = [];
+  var start1 = start;
+  var mangChuaDinhCanTo=[];
+
+
+
+  while(1>0)
+  {
+    if(start1==end) break;
+    mangDinh.push(start1);
+    var a=[];
+    mangChuaDinhDaDi.push(start1);
+    for(var i=0;i<map.length;i++)
+    {
+      if(map[i].cost!=0)
+      {
+        if(map[i].node1==start1)
+        {
+
+          if(mangChuaDinhCanTo.indexOf(start1+map[i].node2)==-1)
+          {
+            mangChuaDinhCanTo.push(start1+map[i].node2);
+            a.push(start1+map[i].node2);
+          
+          }
+      
+          if(mangChiSo.indexOf(map[i].node2)==-1)
+          {
+             mangChiSo.push(map[i].node2);
+             if(mangChiSo.indexOf(start1)==-1) 
+              them(mangTrongSo,start1,map[i].cost);
+            else
+              them(mangTrongSo,start1,(map[i].cost + mangTrongSo[mangChiSo.indexOf(start1)].b));
+          }
+          else
+          {
+             var k=mangChiSo.indexOf(map[i].node2);
+            if(mangTrongSo[k].b>(map[i].cost + mangTrongSo[mangChiSo.indexOf(start1)].b))
+              {
+                
+                 mangTrongSo[k].a=start1;
+                mangTrongSo[k].b=map[i].cost + mangTrongSo[mangChiSo.indexOf(start1)].b;
+              }
+          }
+           map[i].cost=0;
+       }
+        else
+        { 
+          if(map[i].node2==start1)
+         {
+          if(mangChuaDinhCanTo.indexOf(map[i].node1+start1)==-1)
+           {
+            a.push(map[i].node1+start1);
+            mangChuaDinhCanTo.push(map[i].node1+start);
+           }
+           
+           if(mangChiSo.indexOf(map[i].node1)==-1)
+           {
+             mangChiSo.push(map[i].node1);
+             if(mangChiSo.indexOf(start1)==-1) 
+              them(mangTrongSo,start1,map[i].cost);
+            else
+             them(mangTrongSo,start1,map[i].cost + mangTrongSo[mangChiSo.indexOf(start1)].b);
+             
+            }
+          else
+          {
+            var k=mangChiSo.indexOf(map[i].node1);
+            if(mangTrongSo[k].b>(map[i].cost + mangTrongSo[mangChiSo.indexOf(start1)].b))
+            {
+              
+              mangTrongSo[k].a=start1;
+               mangTrongSo[k].b=map[i].cost + mangTrongSo[mangChiSo.indexOf(start1)].b;
+              //document.write(mangTrongSo[k].b);
+           }
+          }
+          map[i].cost=0;   
+       }
+      }
+
+      }
+
+
+     //for.......
+    }
+    mangDo.push(a);
+
+    
+      var chiso;
+      for(var h=0;h<mangChiSo.length;h++)
+      {
+        if(mangChuaDinhDaDi.indexOf(mangChiSo[h])==-1)
+        {
+          chiso=h;
+          break;
+        }
+      }
+      var tam=mangTrongSo[chiso].b;
+      for(var j=chiso+1;j<mangChiSo.length;j++)
+     {
+        if((mangTrongSo[j].b<tam) && mangChuaDinhDaDi.indexOf(mangChiSo[j])==-1)
+       {
+         tam=mangTrongSo[j].b;
+          chiso=j;
+        }
+     }
+    
+     start1=mangChiSo[chiso];
+    //document.write(start,)
+     // document.write(start1,"");
+    //document.write(mangChiSo,"...");
+    //document.write(mangTrongSo[mangChiSo.indexOf(start1)].b,"...");
+    //document.write(mangTrongSo[mangChiSo.indexOf(start1)].a,".............");
+     //document.write(mangTrongSo[1].b,"...");
+      
+     
+    
+
+  }//while.......
+ // document.write(start, end);
+  //document.write(mangChiSo);
+  //document.write(mangTrongSo[4].b);
+  mangDinh.push(end);
+  var tongDuongDi =mangTrongSo[mangChiSo.indexOf(end)].b;
+  var mangChuaDuongDi = [];
+  var dem=0;
+  while(end!=start)
+  {
+    
+    //document.write(mangChiSo.indexOf(end));
+    //var xam=mangTrongSo[mangChiSo.indexOf(end)].a+end;
+   // document.write(xam);
+    mangChuaDuongDi.push(mangTrongSo[mangChiSo.indexOf(end)].a+end);
+    mangVang.push(mangTrongSo[mangChiSo.indexOf(end)].a+end);
+    mangDi.push(mangTrongSo[mangChiSo.indexOf(end)].a+end);
+    end=mangTrongSo[mangChiSo.indexOf(end)].a;
+  }
+  result = mangVang;
+  
+  return mangDo;
+
+}
+var a = run(graph,'A','F');
+
+//document.write("................",mangDinh);
+function start(counter){
+  if(counter < a.length){
+    function start2(count){
+      var key2=mangDinh[counter];
+      drawnode(key2);
+      if (count <a[counter].length){setTimeout(function(){
+        var key = a[counter][count];
+        drawgraph(key);
+        s.refresh();
+        var key3 = result[a.length-counter-1];
+        drawgraphyellow(key3);
+        count ++;
+        start2(count);
+      })
+
+      }
+    }
+    start2(0);
+    setTimeout(function(){
+      counter++;
+      start(counter);
+    }, 4000);
+  }
+}
+start(0);
+    </script>
+   <br>
+   <div id="sigma-container">
+   	<div id="div1" style="display: none;"><b>  2.1</b> chọn A
+    <br> <b> 2.2 </b>Open={}, close={A}
+    <br> <b> 2.3</b> A!= F
+    <br><b>  2.4</b> Xét B C D:  B: g(B) = 3, pre(B) = A,  C: g(C) = 5, pre(C) = A,D: g(D) = 9, pre(D) = A, O= {B,C,D}, Close={A}
+    pre()= A
+</div>
+   <div id="div2" style="display: none"> <b> 2.1</b> Chọn A
+    <br> <b> 2.2</b> Open={}, close={A}
+    <br> <b> 2.3</b> A!= F
+    <br> <b> 2.4</b> Xét B C D:
+    <br>  B: g(B) = 3,&emsp; pre(B) = A, C: g(C) = 5, &emsp;pre(C) = A , D: g(D) = 9, pre(D) = A, O= {B,C,D},&emsp; Close={A}   &emsp;
+</div>
+   <div id="div3" style="display: none;"> <b>2.1:</b> Chọn B 
+   <br> <b>2.2</b> Close={A,B}, O={C,D}
+    <br><b>2.3</b> B!= F
+    <br><b>2.4</b> C,D,E
+    <br>C: g(C) = 5, D: g(D) = 7, E: g(E) = 10, O={CDE}, close = {AB}
+    <br>pre(B)=A</div>
+<div id="div4" style="display: none"><b>2.1:</b> Chọn C
+    <br><b>2.2</b> Close={ABC},&emsp; O={ED}
+    <br><b>2.3</b> C!= F
+    <br><b>2.4</b> ABDE &emsp; D: g(D) = 7 &emsp;E: g(E) = 10 &emsp; O={DE},&emsp; close = {ABC}&emsp;  pre(D)=B
+</div>
+    <div id="div5" style="display: none;">
+    <br><b>2.1:</b> Chọn D
+    <br><b>2.2</b> Close={ABCD},&emsp; O={E}
+    <br><b>2.3</b> D!= F
+    <br><b>2.4</b> BCEF  F:&emsp; g(F) = 9&emsp;  E: g(E) = 9 (ĐÃ DÁN LẠI) &emsp; O={EF}, close = {ABCD}  pre(E)=D
+</div>
+<div id="div6" style="display: none;">
+    <b>2.1</b>: Chọn F 
+    <br><b>2.2</b> Close={A,BCDF},&emsp; O={E}
+    <br><b>2.3</b> F= F DỪNG
+    <br style="font-size: 15px;"><b>VẬY ĐƯỜNG ĐI NGẮN NHẤT LÀ ABDF</b>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
